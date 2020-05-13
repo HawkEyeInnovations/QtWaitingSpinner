@@ -32,7 +32,6 @@ public:
     /*! Constructor for "standard" widget behaviour - use this
    * constructor if you wish to, e.g. embed your widget in another. */
     WaitingSpinnerWidget(QWidget *parent = 0,
-                         bool centerOnParent = true,
                          bool disableParentWhenSpinning = true);
 
     /*! Constructor - use this constructor to automatically create a modal
@@ -42,7 +41,6 @@ public:
    * "centreOnParent" is ignored. */
     WaitingSpinnerWidget(Qt::WindowModality modality,
                          QWidget *parent = 0,
-                         bool centerOnParent = true,
                          bool disableParentWhenSpinning = true);
 
 public slots:
@@ -89,7 +87,6 @@ private:
     void initialize();
     void updateSize();
     void updateTimer();
-    void updatePosition();
 
 private:
     QColor  _color;
@@ -107,7 +104,6 @@ private:
     WaitingSpinnerWidget& operator=(const WaitingSpinnerWidget&);
 
     QTimer *_timer;
-    bool    _centerOnParent;
     bool    _disableParentWhenSpinning;
     int     _currentCounter;
     bool    _isSpinning;

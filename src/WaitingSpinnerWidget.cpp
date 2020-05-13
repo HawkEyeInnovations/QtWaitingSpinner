@@ -32,20 +32,16 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #include <QTimer>
 
 WaitingSpinnerWidget::WaitingSpinnerWidget(QWidget *parent,
-                                           bool centerOnParent,
                                            bool disableParentWhenSpinning)
     : QWidget(parent),
-      _centerOnParent(centerOnParent),
       _disableParentWhenSpinning(disableParentWhenSpinning) {
     initialize();
 }
 
 WaitingSpinnerWidget::WaitingSpinnerWidget(Qt::WindowModality modality,
                                            QWidget *parent,
-                                           bool centerOnParent,
                                            bool disableParentWhenSpinning)
     : QWidget(parent, Qt::Dialog | Qt::FramelessWindowHint),
-      _centerOnParent(centerOnParent),
       _disableParentWhenSpinning(disableParentWhenSpinning){
     initialize();
 
@@ -77,7 +73,6 @@ void WaitingSpinnerWidget::initialize() {
 }
 
 void WaitingSpinnerWidget::paintEvent(QPaintEvent *) {
-    updatePosition();
     QPainter painter(this);
     painter.fillRect(this->rect(), Qt::transparent);
     painter.setRenderHint(QPainter::Antialiasing, true);
@@ -110,7 +105,6 @@ void WaitingSpinnerWidget::paintEvent(QPaintEvent *) {
 }
 
 void WaitingSpinnerWidget::start() {
-    updatePosition();
     _isSpinning = true;
     show();
 
@@ -235,13 +229,6 @@ void WaitingSpinnerWidget::updateSize() {
 
 void WaitingSpinnerWidget::updateTimer() {
     _timer->setInterval(1000 / (_numberOfLines * _revolutionsPerSecond));
-}
-
-void WaitingSpinnerWidget::updatePosition() {
-    if (parentWidget() && _centerOnParent) {
-        move(parentWidget()->width() / 2 - width() / 2,
-             parentWidget()->height() / 2 - height() / 2);
-    }
 }
 
 int WaitingSpinnerWidget::lineCountDistanceFromPrimary(int current, int primary,
