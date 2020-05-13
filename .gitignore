@@ -19,7 +19,7 @@ qrc_*.cpp
 Makefile
 *-build-*
 
-QtWaitingSpinner
+/QtWaitingSpinner
 QtWaitingSpinner.exe
 build-QtWaitingSpinnerTest-Desktop-Debug*
 build-QtWaitingSpinnerTest-GCC-Debug*
